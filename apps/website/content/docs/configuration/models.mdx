@@ -1,0 +1,84 @@
+# Models Configuration
+
+Life.js provides unified APIs for interacting with various AI models including TTS (Text-to-Speech), LLM (Large Language Models), STT (Speech-to-Text), and other AI services.
+
+## TTS (Text-to-Speech) Providers
+
+### Cartesia
+
+Cartesia provides high-quality, low-latency text-to-speech capabilities.
+
+```typescript
+const ttsConfig = {
+  provider: "cartesia",
+  apiKey: "your-cartesia-api-key", // or set CARTESIA_API_KEY env var
+};
+```
+
+**Configuration Options:**
+- `apiKey` (required): Your Cartesia API key
+
+### Google Cloud Text-to-Speech
+
+Google Cloud Text-to-Speech offers a wide variety of voices and languages with natural-sounding speech synthesis.
+
+```typescript
+const ttsConfig = {
+  provider: "google-cloud",
+  projectId: "your-gcp-project-id", // or set GOOGLE_CLOUD_PROJECT_ID env var
+  keyFilename: "/path/to/service-account.json", // or set GOOGLE_APPLICATION_CREDENTIALS env var
+  // or use apiKey instead of keyFilename
+  apiKey: "your-api-key", // or set GOOGLE_CLOUD_API_KEY env var
+  voice: {
+    languageCode: "en-US",
+    name: "en-US-Wavenet-D",
+    ssmlGender: "NEUTRAL", // "NEUTRAL" | "FEMALE" | "MALE"
+  },
+  audioConfig: {
+    audioEncoding: "LINEAR16", // "LINEAR16" | "MP3" | "OGG_OPUS"
+    sampleRateHertz: 16000,
+    speakingRate: 1.0, // 0.25 to 4.0
+    pitch: 0.0, // -20.0 to 20.0
+    volumeGainDb: 0.0, // -96.0 to 16.0
+  },
+};
+```
+
+**Configuration Options:**
+- `projectId` (required): Your Google Cloud project ID
+- `keyFilename` (optional): Path to service account key file (alternative to `apiKey`)
+- `apiKey` (optional): Your Google Cloud API key (alternative to `keyFilename`)
+- `voice` (optional): Voice configuration
+  - `languageCode`: Language code (default: "en-US")
+  - `name`: Voice name (default: "en-US-Wavenet-D")
+  - `ssmlGender`: Voice gender preference
+- `audioConfig` (optional): Audio output configuration
+  - `audioEncoding`: Audio format (currently only LINEAR16 is supported)
+  - `sampleRateHertz`: Sample rate in Hz (default: 16000)
+  - `speakingRate`: Speaking rate (default: 1.0)
+  - `pitch`: Voice pitch adjustment (default: 0.0)
+  - `volumeGainDb`: Volume gain in dB (default: 0.0)
+
+**Prerequisites:**
+Install the Google Cloud Text-to-Speech client library:
+
+```bash
+npm install @google-cloud/text-to-speech
+```
+
+**Authentication:**
+You can authenticate using either:
+1. Service account key file (set `GOOGLE_APPLICATION_CREDENTIALS` or `keyFilename`)
+2. API key (set `GOOGLE_CLOUD_API_KEY` or `apiKey`)
+
+For production use, service account keys are recommended for better security.
+
+**Available Voices:**
+Google Cloud TTS supports hundreds of voices across many languages. Popular options include:
+- `en-US-Wavenet-D` (Male, US English)
+- `en-US-Wavenet-F` (Female, US English) 
+- `en-GB-Wavenet-A` (Female, British English)
+- `fr-FR-Wavenet-A` (Female, French)
+- `de-DE-Wavenet-A` (Female, German)
+
+See the [Google Cloud TTS documentation](https://cloud.google.com/text-to-speech/docs/voices) for a complete list of available voices.

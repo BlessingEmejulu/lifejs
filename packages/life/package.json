@@ -41,7 +41,9 @@
     "zod": "^3.25.58",
     "zod-to-json-schema": "^3.24.5"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@google-cloud/text-to-speech": "^5.0.0"
+  },
   "devDependencies": {
     "tsup": "^8.5.0"
   }

@@ -1,9 +1,11 @@
 import { z } from "zod";
 import { CartesiaTTS, cartesiaTTSConfigSchema } from "./providers/cartesia";
+import { GoogleCloudTTS, googleCloudTTSConfigSchema } from "./providers/google-cloud";
 
 // Providers
 export const ttsProviders = {
   cartesia: { class: CartesiaTTS, configSchema: cartesiaTTSConfigSchema },
+  "google-cloud": { class: GoogleCloudTTS, configSchema: googleCloudTTSConfigSchema },
 } as const;
 
 export type TTSProvider = (typeof ttsProviders)[keyof typeof ttsProviders]["class"];
