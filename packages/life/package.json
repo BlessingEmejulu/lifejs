@@ -42,7 +42,8 @@
     "zod-to-json-schema": "^3.24.5"
   },
   "peerDependencies": {
-    "@google-cloud/text-to-speech": "^5.0.0"
+    "@google-cloud/text-to-speech": "^5.0.0",
+    "@google/generative-ai": "^0.21.0"
   },
   "devDependencies": {
     "tsup": "^8.5.0"

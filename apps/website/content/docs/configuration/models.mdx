@@ -1,6 +1,79 @@
 # Models Configuration
 
-Life.js provides unified APIs for interacting with various AI models including TTS (Text-to-Speech), LLM (Large Language Models), STT (Speech-to-Text), and other AI services.
+Life.js provides unified APIs for interacting with various AI models including LLM (Large Language Models), TTS (Text-to-Speech), STT (Speech-to-Text), and other AI services.
+
+## LLM (Large Language Model) Providers
+
+### OpenAI
+
+OpenAI provides state-of-the-art language models including GPT-4 and GPT-4o.
+
+```typescript
+const llmConfig = {
+  provider: "openai",
+  apiKey: "your-openai-api-key", // or set OPENAI_API_KEY env var
+  model: "gpt-4o-mini", // "gpt-4o-mini" | "gpt-4o"
+  temperature: 0.5,
+};
+```
+
+**Configuration Options:**
+- `apiKey` (required): Your OpenAI API key
+- `model`: Model to use (default: "gpt-4o-mini")
+- `temperature`: Sampling temperature between 0 and 2 (default: 0.5)
+
+### Google Generative AI (Gemini)
+
+Google's Gemini models offer powerful language understanding and generation capabilities.
+
+```typescript
+const llmConfig = {
+  provider: "google-generative-ai",
+  apiKey: "your-google-ai-api-key", // or set GOOGLE_GENERATIVE_AI_API_KEY env var
+  model: "gemini-1.5-flash", // "gemini-1.5-flash" | "gemini-1.5-pro" | "gemini-1.0-pro" | "gemini-1.5-flash-8b"
+  temperature: 0.5,
+  topP: 0.95,
+  topK: 40,
+  maxOutputTokens: 2048,
+  safetySettings: [
+    {
+      category: "HARM_CATEGORY_HATE_SPEECH",
+      threshold: "BLOCK_MEDIUM_AND_ABOVE",
+    },
+  ],
+};
+```
+
+**Configuration Options:**
+- `apiKey` (required): Your Google AI API key
+- `model`: Gemini model to use (default: "gemini-1.5-flash")
+- `temperature`: Sampling temperature between 0 and 2 (default: 0.5)
+- `topP`: Nucleus sampling parameter between 0 and 1 (default: 0.95)
+- `topK`: Top-k sampling parameter between 1 and 40 (default: 40)
+- `maxOutputTokens`: Maximum tokens in response (default: 2048)
+- `safetySettings`: Content safety filters (default: [])
+
+**Prerequisites:**
+Install the Google Generative AI client library:
+
+```bash
+npm install @google/generative-ai
+```
+
+**Available Models:**
+- `gemini-1.5-flash`: Fast, efficient model for most tasks
+- `gemini-1.5-pro`: More capable model for complex reasoning
+- `gemini-1.0-pro`: Stable, production-ready model
+- `gemini-1.5-flash-8b`: Compact model for simple tasks
+
+**Safety Settings:**
+Configure content filtering with safety categories:
+- `HARM_CATEGORY_HATE_SPEECH`
+- `HARM_CATEGORY_DANGEROUS_CONTENT`
+- `HARM_CATEGORY_HARASSMENT`
+- `HARM_CATEGORY_SEXUALLY_EXPLICIT`
+
+Thresholds: `BLOCK_NONE`, `BLOCK_ONLY_HIGH`, `BLOCK_MEDIUM_AND_ABOVE`, `BLOCK_LOW_AND_ABOVE`
 
 ## TTS (Text-to-Speech) Providers
 

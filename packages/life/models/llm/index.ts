@@ -1,9 +1,11 @@
 import { z } from "zod";
 import { OpenAILLM, openAILLMConfigSchema } from "./providers/openai";
+import { GoogleGenerativeAILLM, googleGenerativeAILLMConfigSchema } from "./providers/google-generative-ai";
 
 // Providers
 export const llmProviders = {
   openai: { class: OpenAILLM, configSchema: openAILLMConfigSchema },
+  "google-generative-ai": { class: GoogleGenerativeAILLM, configSchema: googleGenerativeAILLMConfigSchema },
 } as const;
 
 export type LLMProvider = (typeof llmProviders)[keyof typeof llmProviders]["class"];
