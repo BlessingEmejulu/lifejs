@@ -67,5 +67,10 @@
   "tailwindCSS.experimental.classRegex": [
     ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
-  "tailwindCSS.classAttributes": ["class", "className", ".*Class(es)?"]
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    ".*Class(es)?"
+  ],
+  "liveServer.settings.port": 5501
 }
